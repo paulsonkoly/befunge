@@ -15,9 +15,11 @@ class Befunge
     self
   end
 
-  def plus
-    @stack.push(@stack.pop + @stack.pop)
-    self
+  [:+, :-, :*, :/, :%].each do |operator|
+    define_method("_#{operator}") do
+      @stack.push(@stack.pop.send(operator, @stack.pop))
+      self
+    end
   end
 
   private

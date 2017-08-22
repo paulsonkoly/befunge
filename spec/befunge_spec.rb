@@ -20,13 +20,15 @@ RSpec::describe Befunge do
     end
   end
 
-  describe '#_+' do
-    context "after pushing two operands" do
-      before :each { subject._2._3 }
+  [:+, :-, :*, :/, :%].each do |operator|
+    describe "#_#{operator}" do
+      context "after pushing two operands" do
+        before :each { subject._2._3 }
 
-      it "pushes the sum" do
-        subject.plus
-        expect(subject.write.output).to eq '5'
+        it "pushes #{2.send(operator, 3)}" do
+          subject.send("_#{operator}")
+          expect(subject.write.output).to eq (3.send(operator, 2)).to_s
+        end
       end
     end
   end
