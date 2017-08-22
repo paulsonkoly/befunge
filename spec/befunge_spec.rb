@@ -7,4 +7,16 @@ RSpec::describe Befunge do
   (0..9).each do |i|
     it { is_expected.to respond_to :"_#{i}" }
   end
+
+  it { is_expected.to respond_to :_ }
+
+  (0..9).each do |i|
+    context "after pushing #{i}" do
+      before :each { subject.send "_#{i}" }
+
+      it "outputs the pushed value" do
+        expect(subject._.output).to eq "#{i}"
+      end
+    end
+  end
 end
