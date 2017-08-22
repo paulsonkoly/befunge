@@ -32,4 +32,15 @@ RSpec::describe Befunge do
       end
     end
   end
+
+  describe "#!" do
+    context "after pushing 1" do
+      before :each { subject._1 }
+
+      it "pushes 0" do
+        subject.!
+        expect(subject.write.output).to eq '0'
+      end
+    end
+  end
 end

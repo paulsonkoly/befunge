@@ -22,6 +22,10 @@ class Befunge
     end
   end
 
+  def !
+    @stack.push(@stack.pop.zero? ? 1 : 0)
+  end
+
   private
 
   def push(elem)
