@@ -10,8 +10,13 @@ class Befunge
     define_method("_#{i}") { push(i) }
   end
 
-  def _
+  def write
     @output << @stack.pop.to_s
+    self
+  end
+
+  def plus
+    @stack.push(@stack.pop + @stack.pop)
     self
   end
 
