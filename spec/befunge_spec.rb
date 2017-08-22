@@ -52,4 +52,15 @@ RSpec::describe Befunge do
       end
     end
   end
+
+  describe "#compare" do
+    context "after pushing 1 and 2" do
+      before :each { subject._1._2 }
+
+      it "pushes 1" do
+        subject.compare
+        expect(subject.write.output).to eq '1'
+      end
+    end
+  end
 end
