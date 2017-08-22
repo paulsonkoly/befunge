@@ -1,0 +1,2 @@
+class Befunge
+end
