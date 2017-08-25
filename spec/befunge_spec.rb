@@ -2,44 +2,38 @@ require_relative '../befunge'
 require 'rspec'
 
 RSpec::describe Befunge do
-  it { is_expected.to be_a Befunge }
-
-  (0..9).each do |i|
-    it { is_expected.to respond_to :"_#{i}" }
-  end
-
-  it { is_expected.to respond_to :write }
-
   (0..9).each do |i|
     context "after pushing #{i}" do
-      before :each { subject.send "_#{i}" }
+      subject { Befunge.new("#{i}.") }
 
       it "outputs the pushed value" do
-        expect(subject.write.output).to eq "#{i}"
+        expect(subject.step.step.output).to eq "#{i}"
       end
     end
   end
 
-  [:+, :-, :*, :/, :%].each do |operator|
-    describe "#_#{operator}" do
-      context "after pushing two operands" do
-        before :each { subject._2._3 }
+  describe Befunge::ALU do
+    [:+, :-, :*, :/, :%].each do |operator|
+      describe "##{operator}" do
+        context "after pushing 2 and 3" do
+          before :each { subject._2._3 }
 
-        it "pushes #{2.send(operator, 3)}" do
-          subject.send("_#{operator}")
-          expect(subject.write.output).to eq (3.send(operator, 2)).to_s
+          it "pushes #{2.send(operator, 3)}" do
+            subject.send(operator)
+            expect(subject.pop).to eq 3.send(operator, 2)
+          end
         end
       end
     end
-  end
 
-  describe "#!" do
-    context "after pushing 1" do
-      before :each { subject._1 }
+    describe "#!" do
+      context "after pushing 1" do
+        before :each { subject._1 }
 
-      it "pushes 0" do
-        subject.!
-        expect(subject.write.output).to eq '0'
+        it "pushes 0" do
+          subject.!
+          expect(subject.pop).to eq 0
+        end
       end
     end
 
@@ -48,18 +42,18 @@ RSpec::describe Befunge do
 
       it "pushes 0" do
         subject.!
-        expect(subject.write.output).to eq '1'
+        expect(subject.pop).to eq 1
       end
     end
-  end
 
-  describe "#compare" do
-    context "after pushing 1 and 2" do
-      before :each { subject._1._2 }
+    describe "#compare" do
+      context "after pushing 1 and 2" do
+        before :each { subject._1._2 }
 
-      it "pushes 1" do
-        subject.compare
-        expect(subject.write.output).to eq '1'
+        it "pushes 1" do
+          subject.compare
+          expect(subject.pop).to eq 1
+        end
       end
     end
   end
