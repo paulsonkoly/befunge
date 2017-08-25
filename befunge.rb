@@ -3,19 +3,35 @@ class Befunge
 
   def initialize(program)
     @program = program.split("\n")
-    @cursor = Vector.new 0, 0
-    @direction = Vector.new 1, 0
     @output = ''
     @alu = ALU.new
+    @controller = Controller.new
   end
 
+  #############################################################################
   Vector = Struct.new :x, :y do
     def +(other)
       Vector.new(x: x + other.x, y: y + other.y)
     end
   end
 
-  class Controller
+  class Controller < Vector
+    DIRECTIONS = { ">": Vector.new(1, 0),
+                   "<": Vector.new(-1, 0),
+                   "^": Vector.new(0, -1),
+                   "v": Vector.new(0, 1) }.freeze
+    attr_writer :direction
+
+    def initialize
+      super(0, 0)
+      @direction = :>
+    end
+
+    def move!
+      self.x += DIRECTIONS[@direction].x
+      self.y += DIRECTIONS[@direction].y
+      self
+    end
   end
 
   #############################################################################
@@ -53,8 +69,8 @@ class Befunge
   end
 
   def step
-    dispatch(@program[@cursor.y][@cursor.x])
-    move
+    dispatch(@program[@controller.y][@controller.x])
+    @controller.move!
     self
   end
 
@@ -62,16 +78,12 @@ class Befunge
 
   def dispatch(operator)
     case operator
-    when '`'     then @alu.compare
-    when /[0-9]/ then @alu.send("_#{operator}")
-    when '.'     then self.send(:write)
+    when '`'      then @alu.compare
+    when /[0-9]/  then @alu.send("_#{operator}")
+    when /[<>^v]/ then @controller.direction = operator.to_sym
+    when '.'      then self.send(:write)
     else send(operator)
     end
-  end
-
-  def move
-    @cursor.x += @direction.x
-    @cursor.y += @direction.y
   end
 
   def write
