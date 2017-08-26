@@ -128,7 +128,7 @@ class Befunge
       when '?'      then @controller._?
       when /[_|]/   then @controller.send(operator, @alu.pop)
       when '.'      then write
-      when ','      then write_char
+      when ','      then write(:chr)
       when '"'      then string_mode!
       when ' '      then
       when 'p'      then put!
@@ -137,13 +137,8 @@ class Befunge
     end
   end
 
-  def write
-    @output << @alu.pop.to_s
-    self
-  end
-
-  def write_char
-    @output << @alu.pop.chr
+  def write(message = :to_s)
+    @output << @alu.pop.send(message)
     self
   end
 
