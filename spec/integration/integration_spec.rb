@@ -19,4 +19,13 @@ describe "integration" do
     subject.run(quine)
     expect(subject.output).to eq quine
   end
+
+  it 'runs erastothenes' do
+    sieve = "2>:3g\" \"-!v\\  g30          <\n"  <<
+            " |!`\"&\":+1_:.:03p>03g+:\"&\"`|\n" <<
+            " @               ^  p3\\\" \":<\n"  <<
+            "2 2345678901234567890123456789012345678"
+    subject.run(sieve)
+    expect(subject.output).to eq "23571113171923293137"
+  end
 end
