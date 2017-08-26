@@ -8,17 +8,17 @@ require_relative '../befunge'
 require 'rspec'
 
 RSpec::describe Befunge do
-#  (0..9).each do |i|
-#    context "after pushing #{i}" do
-#      subject { Befunge.new("#{i}.") }
-#
-#      it "outputs the pushed value" do
-#        expect(subject.step.step.output).to eq "#{i}"
-#      end
-#    end
-#  end
-
   describe Befunge::ALU do
+
+    (0..9).each do |i|
+      describe "_#{i}" do
+        it "pushes the value #{i}" do
+          subject.send("_#{i}")
+          expect(subject.pop).to eq i
+        end
+      end
+    end
+
     [:+, :-, :*, :/, :%].each do |operator|
       describe "##{operator}" do
         context "after pushing 2 and 3" do
