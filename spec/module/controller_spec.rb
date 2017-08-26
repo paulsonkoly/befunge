@@ -7,8 +7,8 @@ describe Befunge::Controller do
       before :each { subject.direction = :> }
 
       it 'moves to the right' do
-        expect { subject.move! }.to change(subject, :x).by(1)
-        expect { subject.move! }.not_to change(subject, :y)
+        expect { subject.move! }.to change(subject, :position)
+          .by(Befunge::Vector.new(1, 0))
       end
     end
 
@@ -16,8 +16,8 @@ describe Befunge::Controller do
       before :each { subject.direction = :< }
 
       it 'moves to the left' do
-        expect { subject.move! }.to change(subject, :x).by(-1)
-        expect { subject.move! }.not_to change(subject, :y)
+        expect { subject.move! }.to change(subject, :position)
+          .by(Befunge::Vector.new(-1, 0))
       end
     end
 
@@ -25,8 +25,8 @@ describe Befunge::Controller do
       before :each { subject.direction = :v }
 
       it 'moves down' do
-        expect { subject.move! }.not_to change(subject, :x)
-        expect { subject.move! }.to change(subject, :y).by(1)
+        expect { subject.move! }.to change(subject, :position)
+          .by(Befunge::Vector.new(0, 1))
       end
     end
 
@@ -34,8 +34,8 @@ describe Befunge::Controller do
       before :each { subject.direction = :^ }
 
       it 'moves up' do
-        expect { subject.move! }.not_to change(subject, :x)
-        expect { subject.move! }.to change(subject, :y).by(-1)
+        expect { subject.move! }.to change(subject, :position)
+          .by(Befunge::Vector.new(0, -1))
       end
     end
 

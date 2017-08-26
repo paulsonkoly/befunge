@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 require_relative '../../lib/befunge/interpreter.rb'
 
 def move_two_cells(controller)
-  allow(controller).to receive(:x).and_return(0, 1)
-  allow(controller).to receive(:y).and_return(0, 0)
+  allow(controller).to receive(:position).and_return(Befunge::Vector.new(0, 0),
+                                                     Befunge::Vector.new(1, 0))
   allow(controller).to receive(:move!)
 end
 
@@ -76,8 +76,10 @@ describe Befunge::Interpreter do
 
   describe "#run(\"\\\"a@\")" do
     it "sets itself to string mode and pushes 'a'" do
-      allow(controller).to receive(:x).and_return(0,1,2)
-      allow(controller).to receive(:y).and_return(0,0,0)
+      allow(controller).to receive(:position).and_return(
+        Befunge::Vector.new(0, 0),
+        Befunge::Vector.new(1, 0),
+        Befunge::Vector.new(2, 0))
       allow(controller).to receive(:move!).twice
       expect(alu).to receive(:push).with('a'.ord)
       subject.run("\"a@")

@@ -6,22 +6,24 @@ module Befunge
     attr_reader :output
 
     def initialize(alu = Befunge::ALU.new,
-                   controller = Befunge::Controller.new)
+                   controller = Befunge::Controller.new,
+                   memory = Befunge::Memory.new)
       @output = ''
       @string_mode = false
       @alu = alu
       @controller = controller
+      @memory = memory
     end
 
     def run(program)
-      @program = program.split("\n")
+      @memory.program = program.split("\n")
       step while operator != '@'
     end
 
     private
 
     def operator
-      @operator ||= @program[@controller.y][@controller.x]
+      @operator ||= @memory[@controller.position]
     end
 
     def step

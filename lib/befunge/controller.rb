@@ -1,9 +1,7 @@
 require_relative 'vector'
-require 'forwardable'
 
 module Befunge
   class Controller
-    extend Forwardable
 
     DIRECTIONS = { ">": Vector.new(1, 0),
                    "<": Vector.new(-1, 0),
@@ -17,9 +15,6 @@ module Befunge
       @direction = :>
       @trampoline = false
     end
-
-    def_delegator :@position, :x
-    def_delegator :@position, :y
 
     def _?
       @direction = [:<, :>, :^, :v].sample
