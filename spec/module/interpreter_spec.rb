@@ -22,6 +22,16 @@ describe Befunge::Interpreter do
     end
   end
 
+  %w(+ - * / %).each do |op|
+    describe "opcode #{op}" do
+      it "sends #{op} to the alu" do
+        expect_cell(controller, memory, op)
+        expect(alu).to receive(op)
+        subject.send(:dispatch)
+      end
+    end
+  end
+
   {'$' => :pop, '\\' => :swap,
    ':' => :dupl, '`' => :compare}.each do |op, message|
     describe "opcode #{op}" do
