@@ -84,11 +84,11 @@ describe Befunge::Interpreter do
     end
   end
 
-  describe "opcode \"a" do
-    it "sets itself to string mode and pushes 'a'" do
-      expect_cell(controller, memory, '"', 'a')
+  describe "opcode \"a\"" do
+    it "sets itself to string mode, pushes 'a' and comes out of string mode" do
+      expect_cell(controller, memory, '"', 'a', '"')
       expect(alu).to receive(:push).with('a'.ord)
-      2.times { subject.send(:dispatch) }
+      3.times { subject.send(:dispatch) }
     end
   end
 

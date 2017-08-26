@@ -31,7 +31,7 @@ module Befunge
 
     def dispatch
       operator = @memory[@controller.position]
-      if @string_mode
+      if @string_mode && operator != '"'
         @alu.push(operator.ord)
       else
         case operator
