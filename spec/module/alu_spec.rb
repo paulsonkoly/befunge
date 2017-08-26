@@ -18,7 +18,7 @@ describe Befunge::ALU do
 
         it "pushes #{2.send(operator, 3)}" do
           subject.send(operator)
-          expect(subject.pop).to eq 3.send(operator, 2)
+          expect(subject.pop).to eq 2.send(operator, 3)
         end
       end
     end

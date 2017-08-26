@@ -6,6 +6,7 @@ require 'ruby-prof'
 result = RubyProf.profile do
   b = Befunge::Interpreter.new
   b.run("08>:1-:v v *_$.@ \n  ^    _$>\\:^  ^    _$>\\:^")
+  p b.output
 end
 
 # print a graph profile to text

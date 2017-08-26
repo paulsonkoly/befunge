@@ -10,7 +10,9 @@ module Befunge
 
     [:+, :-, :*, :/, :%].each do |operator|
       define_method(operator) do
-        push(@stack.pop.send(operator, @stack.pop))
+        a = @stack.pop
+        b = @stack.pop
+        push(b.send(operator, a))
       end
     end
 
