@@ -48,7 +48,16 @@ describe Befunge::ALU do
     context "after pushing 1 and 2" do
       before :each { subject._1._2 }
 
-      it "pushes 1" do
+      it "pushes 0" do
+        subject.compare
+        expect(subject.pop).to eq 0
+      end
+    end
+
+    context "after pushing 2 and 1" do
+      before :each { subject._2._1 }
+
+      it 'pushes 1' do
         subject.compare
         expect(subject.pop).to eq 1
       end

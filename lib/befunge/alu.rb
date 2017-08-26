@@ -21,7 +21,7 @@ module Befunge
     end
 
     def compare
-      push(@stack.pop > @stack.pop ? 1 : 0)
+      push(@stack.pop < @stack.pop ? 1 : 0)
     end
 
     def dupl
