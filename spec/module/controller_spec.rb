@@ -43,7 +43,7 @@ describe Befunge::Controller do
       before :each { subject._? }
 
       it 'moves' do
-        expect { subject.move! }.to change { subject }
+        expect { subject.move! }.to change(subject, :position)
       end
     end
   end
