@@ -8,4 +8,5 @@ end
 group :test do
   gem 'rspec'
   gem 'simplecov'
+  gem 'ruby-prof'
 end

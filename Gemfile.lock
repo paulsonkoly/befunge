@@ -18,6 +18,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    ruby-prof (0.16.2)
     simplecov (0.15.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -30,6 +31,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   rspec
+  ruby-prof
   simplecov
 
 BUNDLED WITH
