@@ -1,5 +1,6 @@
 require_relative 'alu'
 require_relative 'controller'
+require_relative 'memory'
 
 module Befunge
   class Interpreter
