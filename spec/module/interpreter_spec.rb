@@ -33,7 +33,8 @@ describe Befunge::Interpreter do
   end
 
   {'$' => :pop, '\\' => :swap,
-   ':' => :dupl, '`' => :compare}.each do |op, message|
+   ':' => :dupl, '`' => :compare,
+   '!' => :! }.each do |op, message|
     describe "opcode #{op}" do
       it "sends #{message} to the alu" do
         expect_cell(controller, memory, op)
