@@ -45,6 +45,7 @@ module Befunge
         when /[<>^v]/   then @controller.direction = operator.to_sym
         when '?'        then @controller._?
         when /[_|]/     then @controller.send(operator, @alu.pop)
+        when '#'        then @controller.trampoline!
         when '.'        then @memory.write(@alu.pop.to_s)
         when ','        then @memory.write(@alu.pop.chr)
         when '"'        then string_mode!

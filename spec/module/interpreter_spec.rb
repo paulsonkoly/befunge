@@ -45,7 +45,7 @@ describe Befunge::Interpreter do
 
  {'<' => :direction=, '>' => :direction=,
   '^' => :direction=, 'v' => :direction=,
-  '?' => :_? }.each do |op, message|
+  '?' => :_?, '#' => :trampoline! }.each do |op, message|
     describe "opcode #{op}" do
       it "sends #{message} to the controller" do
         expect_cell(controller, memory, op)
