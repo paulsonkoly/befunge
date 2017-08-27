@@ -38,7 +38,7 @@ describe Befunge::ALU do
   context "after pushing 0" do
     before :each { subject._0 }
 
-    it "pushes 0" do
+    it "pushes 1" do
       subject.!
       expect(subject.pop).to eq 1
     end
