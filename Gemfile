@@ -6,6 +6,7 @@ group :development do
 end
 
 group :test do
+  gem 'guard-rspec', require: false
   gem 'rspec'
   gem 'simplecov'
   gem 'ruby-prof'
