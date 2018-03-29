@@ -7,9 +7,9 @@ def expect_cell(controller, memory, *cell)
 end
 
 describe Befunge::Interpreter do
-  let :alu { double('alu') }
-  let :controller { double('controller') }
-  let :memory { double('memory') }
+  let(:alu) { double('alu') }
+  let(:controller) { double('controller') }
+  let(:memory) { double('memory') }
   subject { Befunge::Interpreter.new(alu, controller, memory) }
 
   (0..9).each do |i|

@@ -14,7 +14,7 @@ describe Befunge::ALU do
   [:+, :-, :*, :/, :%].each do |operator|
     describe "##{operator}" do
       context "after pushing 2 and 3" do
-        before :each { subject._2._3 }
+        before(:each) { subject._2._3 }
 
         it "pushes #{2.send(operator, 3)}" do
           subject.send(operator)
@@ -26,7 +26,7 @@ describe Befunge::ALU do
 
   describe "#!" do
     context "after pushing 1" do
-      before :each { subject._1 }
+      before(:each) { subject._1 }
 
       it "pushes 0" do
         subject.!
@@ -36,7 +36,7 @@ describe Befunge::ALU do
   end
 
   context "after pushing 0" do
-    before :each { subject._0 }
+    before(:each) { subject._0 }
 
     it "pushes 1" do
       subject.!
@@ -46,7 +46,7 @@ describe Befunge::ALU do
 
   describe "#compare" do
     context "after pushing 1 and 2" do
-      before :each { subject._1._2 }
+      before(:each) { subject._1._2 }
 
       it "pushes 0" do
         subject.compare
@@ -55,7 +55,7 @@ describe Befunge::ALU do
     end
 
     context "after pushing 2 and 1" do
-      before :each { subject._2._1 }
+      before(:each) { subject._2._1 }
 
       it 'pushes 1' do
         subject.compare
@@ -74,7 +74,7 @@ describe Befunge::ALU do
     end
 
     context 'if the stack contains 13' do
-      before :each { subject.push 13 }
+      before(:each) { subject.push 13 }
 
       it 'pushes two 13s' do
         subject.dupl
@@ -86,7 +86,7 @@ describe Befunge::ALU do
 
   describe '#swap' do
     context 'if the stack has only one elem' do
-      before :each { subject.push 13 }
+      before(:each) { subject.push 13 }
 
       it 'pushes a zero' do
         subject.swap
@@ -96,7 +96,7 @@ describe Befunge::ALU do
     end
 
     context 'if the stack contains 13, 14' do
-      before :each do
+      before(:each) do
         subject.push 13
         subject.push 29
       end
