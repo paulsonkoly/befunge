@@ -4,7 +4,7 @@ Partial implementation of the befunge interpreter.
 
 The project was an experiment in TDD, with clearly separated and separately tested modules, using dependency injection techniques.
 
-The interpreter is loosely modelled after a simplistic view of a CPU with modules for [ALU](/lib/befunge/alu.rb), [Controller](/lib/befunge/controller.rb) [Memory](/lib/befunge/memory.rb), and the full interpreter [Interpreter](/lib/befunge/interpreter.rb) that wires these modules together.
+The interpreter is loosely modelled after a simplistic view of a CPU with modules for [ALU](/lib/befunge/alu.rb), [Controller](/lib/befunge/controller.rb) [Memory](/lib/befunge/memory.rb), and the full [Interpreter](/lib/befunge/interpreter.rb) that wires these modules together.
 
 At the module level they are independently tested, using test doubles for across module message sending.
 
