@@ -1,13 +1,13 @@
 require_relative 'vector'
 
 module Befunge
+  # Controller logic of the {Befunge} interpreter. Controlls the movement of
+  # the instruction pointer on a 2D grid.
   class Controller
-
-    DIRECTIONS = { ">": Vector.new(1, 0),
-                   "<": Vector.new(-1, 0),
-                   "^": Vector.new(0, -1),
-                   "v": Vector.new(0, 1) }.freeze
+    # value is one of +'>'+, +'<'+, +'^'+, +'v'+ representing left, right, up and
+    # down movement
     attr_writer :direction
+    # current location of the cursor
     attr_reader :position
 
     def initialize
@@ -16,6 +16,8 @@ module Befunge
       @trampoline = false
     end
 
+    # sets direction to a random value
+    # @return [String] the set direction
     def _?
       @direction = [:<, :>, :^, :v].sample
     end
@@ -37,5 +39,12 @@ module Befunge
       @trampoline = false
       self
     end
+
+    private
+
+    DIRECTIONS = { ">": Vector.new(1, 0),
+                   "<": Vector.new(-1, 0),
+                   "^": Vector.new(0, -1),
+                   "v": Vector.new(0, 1) }.freeze
   end
 end
