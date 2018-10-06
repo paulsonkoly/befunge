@@ -61,27 +61,40 @@ module Befunge
       push(@stack.pop.zero? ? 1 : 0)
     end
 
+    # Pops two values and if the first is less than the second it pushes 1,
+    # otherwise pushes 0.
+    # @return [ALU] self
     def compare
       push(@stack.pop < @stack.pop ? 1 : 0)
     end
 
     # pushes the elem from the top of the stack twice
+    # @return [ALU] self
     def dupl
       elem = pop || 0
       push(elem).push(elem)
     end
 
+
+    # Swaps the top two elements on the stack. The stack has to have at least
+    # one element. If the stack only had one element it pushes an extra 0.
+    # @return [ALU] self
     def swap
       elem1 = pop
       elem2 = pop || 0
       push(elem1).push(elem2)
     end
 
+    # pushes an elem to the stack
+    # @param elem the new elem at the top
+    # @return [ALU] self
     def push(elem)
       @stack.push(elem)
       self
     end
 
+    # pops the elem from the top of the stack
+    # @return the elem popped
     def pop
       @stack.pop
     end

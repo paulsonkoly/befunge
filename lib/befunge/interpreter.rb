@@ -2,8 +2,16 @@ require_relative 'alu'
 require_relative 'controller'
 require_relative 'memory'
 
+# For the Befunge language see https://en.wikipedia.org/wiki/Befunge.
 module Befunge
+  # Organinizes {Befunge::ALU}, {Befunge::Controller} and {Befunge::Memory}
+  # providing a single interpreter interface.
   class Interpreter
+    # Normally the default arguments should be used unless one wants to swap a
+    # sub-module to a custom one.
+    # @param alu [Befunge::ALU] an ALU instance
+    # @param controller [Befunge::Controller] a Controller instance
+    # @param memory [Befunge::Memory] a Memory instance.
     def initialize(alu = Befunge::ALU.new,
                    controller = Befunge::Controller.new,
                    memory = Befunge::Memory.new)
@@ -13,10 +21,13 @@ module Befunge
       @memory = memory
     end
 
+    # @return the output from the {Befunge::Memory#output}
     def output
       @memory.output
     end
 
+    # Runs the given program
+    # @param program [String] the input program
     def run(program)
       @memory.program = program.split("\n")
       step while @memory[@controller.position] != '@'

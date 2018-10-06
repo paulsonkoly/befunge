@@ -22,18 +22,24 @@ module Befunge
       @direction = [:<, :>, :^, :v].sample
     end
 
+    # conditional set of the direction
+    # @param elem if zero the new direction is :> otherwise it's :<
     def _(elem)
       @direction = elem.zero? ? :> : :<
     end
 
+    # conditional set of the direction
+    # @param elem if zero the new direction is :v otherwise it's :^
     def |(elem)
       @direction = elem.zero? ? :v : :^
     end
 
+    # sets trampoline mode for the next {#move!}.
     def trampoline!
       @trampoline = true
     end
 
+    # executes a movement on the cursor
     def move!
       @position += DIRECTIONS[@direction] * (@trampoline ? 2 : 1)
       @trampoline = false
